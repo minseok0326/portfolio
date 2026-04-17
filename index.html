@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>유민석 | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #1a2b4a;
+      --navy-2:  #22396a;
+      --accent:  #2b5be0;
+      --accent2: #4f7aff;
+      --accent-bg: #eef2ff;
+      --bg:      #f0f2f8;
+      --card:    #ffffff;
+      --border:  #e2e6f0;
+      --text:    #1e2532;
+      --muted:   #64748b;
+      --light:   #94a3b8;
+      --r:       18px;
+      --r-sm:    10px;
+      --sh:      0 2px 12px rgba(26,43,74,.07), 0 1px 3px rgba(26,43,74,.05);
+      --sh-hover:0 8px 32px rgba(43,91,224,.14), 0 2px 8px rgba(26,43,74,.08);
+      --t:       .25s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter','Noto Sans KR',sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(16px,3vw,48px);
+      background: rgba(240,242,248,.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 900; font-size: 1.05rem; color: var(--navy); text-decoration: none; letter-spacing: -.3px; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 6px; list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-weight: 500; color: var(--muted); text-decoration: none;
+      padding: 5px 12px; border-radius: 100px;
+      transition: background var(--t), color var(--t);
+    }
+    .nav-links a:hover { background: var(--accent-bg); color: var(--accent); }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 6px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--t); }
+    .mobile-menu {
+      display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 99;
+      background: var(--card); border-bottom: 1px solid var(--border);
+      padding: 12px 16px 20px; flex-direction: column; gap: 2px; box-shadow: var(--sh);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { padding: 10px 12px; font-size: .9rem; font-weight: 500; color: var(--muted); text-decoration: none; border-radius: var(--r-sm); }
+    .mobile-menu a:hover { background: var(--accent-bg); color: var(--accent); }
+
+    /* ── MAIN LAYOUT ── */
+    .page {
+      max-width: 1200px; margin: 0 auto;
+      padding: 72px 20px 32px;
+    }
+
+    /* ── BENTO GRID ── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(0, auto);
+      gap: 14px;
+    }
+    .cell {
+      background: var(--card); border-radius: var(--r);
+      border: 1px solid var(--border);
+      box-shadow: var(--sh); overflow: hidden;
+      transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+    }
+    .cell.clickable { cursor: pointer; }
+    .cell.clickable:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--sh-hover);
+      border-color: rgba(43,91,224,.22);
+    }
+
+    /* Column spans */
+    .col-5  { grid-column: span 5; }
+    .col-7  { grid-column: span 7; }
+    .col-4  { grid-column: span 4; }
+    .col-8  { grid-column: span 8; }
+    .col-6  { grid-column: span 6; }
+    .col-3  { grid-column: span 3; }
+    .col-9  { grid-column: span 9; }
+    .col-12 { grid-column: span 12; }
+
+    /* ── HERO CELL ── */
+    .hero-cell {
+      grid-column: span 7;
+      padding: 36px 40px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 60%, #1e3a8a 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-cell::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+    .hero-cell::after {
+      content: ''; position: absolute; bottom: -80px; right: 100px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(79,122,255,.08);
+    }
+    .hero-eyebrow {
+      font-size: .72rem; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: rgba(255,255,255,.55);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1.5px; background: rgba(255,255,255,.4); }
+    .hero-cell h1 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 900; letter-spacing: -1.2px; color: #fff;
+      line-height: 1.08; margin-bottom: 14px;
+    }
+    .hero-cell h1 span { color: #7da4ff; }
+    .hero-tagline {
+      font-size: clamp(.85rem,1.2vw,1rem); color: rgba(255,255,255,.65);
+      line-height: 1.7; margin-bottom: 28px; max-width: 420px;
+    }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: var(--r-sm);
+      font-size: .82rem; font-weight: 600; text-decoration: none;
+      transition: var(--t); letter-spacing: .1px; border: none; cursor: pointer;
+    }
+    .btn svg { width: 14px; height: 14px; }
+    .btn-white { background: #fff; color: var(--navy); box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    .btn-white:hover { background: var(--accent-bg); color: var(--accent); transform: translateY(-1px); }
+    .btn-ghost-w { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); border: 1px solid rgba(255,255,255,.2); }
+    .btn-ghost-w:hover { background: rgba(255,255,255,.2); }
+
+    /* ── AVATAR CELL ── */
+    .avatar-cell {
+      grid-column: span 5;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 32px 24px; gap: 16px;
+      background: linear-gradient(160deg, #f8f9ff 0%, var(--accent-bg) 100%);
+    }
+    .avatar-ring {
+      width: clamp(80px,10vw,120px); height: clamp(80px,10vw,120px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(1.6rem,3vw,2.6rem); font-weight: 900; color: #fff;
+      letter-spacing: -1px; box-shadow: 0 8px 24px rgba(43,91,224,.25);
+    }
+    .avatar-name { font-size: 1.1rem; font-weight: 800; color: var(--navy); letter-spacing: -.3px; }
+    .avatar-role { font-size: .78rem; color: var(--muted); font-weight: 500; }
+    .avatar-contacts { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .contact-row {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; color: var(--muted); padding: 7px 12px;
+      background: var(--card); border-radius: var(--r-sm); border: 1px solid var(--border);
+      text-decoration: none; transition: var(--t);
+    }
+    .contact-row:hover { border-color: var(--accent2); color: var(--accent); background: var(--accent-bg); }
+    .contact-row svg { width: 13px; height: 13px; flex-shrink: 0; color: var(--accent); }
+
+    /* ── ABOUT CELL ── */
+    .about-cell { grid-column: span 4; padding: 28px 28px; }
+    .cell-label {
+      font-size: .68rem; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .cell-label::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .about-bio { font-size: .85rem; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .info-list { display: flex; flex-direction: column; gap: 0; }
+    .info-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 8px 0; border-bottom: 1px solid var(--border); gap: 12px;
+      font-size: .82rem;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-k { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .info-v { color: var(--muted); text-align: right; font-size: .8rem; }
+    .badge {
+      display: inline-flex; align-items: center;
+      font-size: .72rem; font-weight: 600; color: var(--accent);
+      background: var(--accent-bg); padding: 2px 8px; border-radius: 100px;
+    }
+
+    /* ── STATS CELL ── */
+    .stats-cell { grid-column: span 2; display: flex; flex-direction: column; gap: 0; }
+    .stat-item {
+      padding: 18px 16px; border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; justify-content: center; flex: 1;
+    }
+    .stat-item:last-child { border-bottom: none; }
+    .stat-num { font-size: 1.4rem; font-weight: 900; color: var(--navy); letter-spacing: -.8px; line-height: 1; margin-bottom: 4px; }
+    .stat-num span { font-size: .8rem; font-weight: 700; color: var(--accent); }
+    .stat-desc { font-size: .72rem; color: var(--muted); font-weight: 500; line-height: 1.4; }
+
+    /* ── SKILLS CELL ── */
+    .skills-cell { grid-column: span 12; padding: 24px 28px; }
+    .skills-inner { display: flex; flex-wrap: wrap; gap: 20px; }
+    .skill-group { display: flex; flex-direction: column; gap: 8px; min-width: 140px; }
+    .skill-group-label { font-size: .67rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--light); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 11px; border-radius: var(--r-sm);
+      font-size: .78rem; font-weight: 500;
+      border: 1.5px solid var(--border); background: var(--bg); color: var(--text);
+      transition: var(--t); cursor: default;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+    /* ── PROJECT CARDS ── */
+    .proj-cell { grid-column: span 4; display: flex; flex-direction: column; }
+    .proj-header {
+      padding: 24px 24px 18px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+      position: relative; overflow: hidden;
+    }
+    .proj-header::after {
+      content: ''; position: absolute; top: -30px; right: -30px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+    .proj-num { font-size: .65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 8px; }
+    .proj-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .proj-title { font-size: .95rem; font-weight: 700; color: #fff; line-height: 1.35; }
+    .proj-body { padding: 18px 24px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .proj-desc { font-size: .82rem; color: var(--muted); line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .proj-techs { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tech-pill { font-size: .7rem; font-weight: 500; padding: 2px 8px; border-radius: 100px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+    .proj-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+    .more-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .78rem; font-weight: 600; color: var(--accent);
+      padding: 6px 12px; border-radius: var(--r-sm);
+      background: var(--accent-bg); border: 1.5px solid rgba(43,91,224,.2);
+      transition: var(--t); text-decoration: none; cursor: pointer;
+    }
+    .more-btn:hover { background: var(--accent); color: #fff; }
+    .more-btn svg { width: 12px; height: 12px; }
+
+    /* ── ACTIVITY CELL ── */
+    .act-cell { grid-column: span 3; padding: 22px 20px; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: flex; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); position: relative;
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); margin-top: 5px; flex-shrink: 0;
+    }
+    .tl-dot.gold { background: #f59e0b; }
+    .tl-content { flex: 1; }
+    .tl-title { font-size: .82rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .tl-date { font-size: .72rem; color: var(--light); margin-top: 2px; }
+
+    /* ── AWARDS CELL ── */
+    .award-cell { grid-column: span 3; padding: 22px 20px; }
+    .award-list { display: flex; flex-direction: column; gap: 10px; }
+    .award-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px; border-radius: var(--r-sm);
+      background: var(--bg); border: 1px solid var(--border);
+    }
+    .award-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .award-title { font-size: .82rem; font-weight: 600; color: var(--text); }
+    .award-date { font-size: .72rem; color: var(--light); margin-top: 2px; }
+
+    /* ── CONTACT CTA CELL ── */
+    .cta-cell {
+      grid-column: span 12; padding: 32px 40px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 50%, #1e3a8a 100%);
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      position: relative; overflow: hidden;
+    }
+    .cta-cell::before {
+      content: ''; position: absolute; right: -80px; top: -80px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+    .cta-left h2 { font-size: clamp(1.2rem,2vw,1.8rem); font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .cta-left p { font-size: .88rem; color: rgba(255,255,255,.6); }
+    .cta-btns { display: flex; gap: 10px; flex-shrink: 0; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    /* ── FOOTER ── */
+    .footer { text-align: center; padding: 20px; font-size: .75rem; color: var(--light); }
+
+    /* ══════════════════════════════════════
+       MODAL
+    ══════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(15,20,35,.55); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: var(--card); border-radius: 20px;
+      width: 100%; max-width: 680px; max-height: 88vh;
+      overflow-y: auto; box-shadow: 0 24px 80px rgba(26,43,74,.25);
+      transform: translateY(24px) scale(.97);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+    }
+    .modal-overlay.open .modal { transform: none; }
+    .modal-hero {
+      padding: 36px 36px 28px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 60%, #1e3a8a 100%);
+      position: relative; overflow: hidden;
+    }
+    .modal-hero::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; z-index: 2;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; transition: background var(--t);
+    }
+    .modal-close:hover { background: rgba(255,255,255,.3); }
+    .modal-close svg { width: 14px; height: 14px; }
+    .modal-proj-num { font-size: .68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 8px; }
+    .modal-icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .modal-title { font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 16px; }
+    .modal-tech-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .modal-pill {
+      font-size: .75rem; font-weight: 600; padding: 4px 12px;
+      border-radius: 100px; background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.15);
+    }
+    .modal-body { padding: 28px 36px 36px; }
+    .modal-section { margin-bottom: 24px; }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-section-title {
+      font-size: .72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .modal-section p { font-size: .9rem; color: var(--muted); line-height: 1.85; }
+    .modal-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .modal-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .88rem; color: var(--muted); line-height: 1.6;
+    }
+    .modal-list li::before { content: '›'; color: var(--accent); font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+    .modal-result {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 4px;
+    }
+    .result-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r-sm); padding: 14px 16px;
+    }
+    .result-card .r-num { font-size: 1.4rem; font-weight: 900; color: var(--navy); letter-spacing: -.5px; }
+    .result-card .r-num span { font-size: .9rem; color: var(--accent); }
+    .result-card .r-label { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+    .modal-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .modal-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: var(--r-sm);
+      font-size: .85rem; font-weight: 600; text-decoration: none;
+      transition: var(--t);
+    }
+    .modal-link svg { width: 14px; height: 14px; }
+    .modal-link-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(43,91,224,.3); }
+    .modal-link-primary:hover { background: var(--navy); }
+    .modal-link-ghost { background: var(--bg); color: var(--text); border: 1.5px solid var(--border); }
+    .modal-link-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .col-5, .col-7 { grid-column: span 12; }
+      .col-4 { grid-column: span 6; }
+      .col-8 { grid-column: span 12; }
+      .hero-cell { grid-column: span 12; }
+      .avatar-cell { grid-column: span 12; flex-direction: row; justify-content: flex-start; }
+      .about-cell { grid-column: span 12; }
+      .stats-cell { grid-column: span 12; flex-direction: row; }
+      .stats-cell .stat-item { border-bottom: none; border-right: 1px solid var(--border); }
+      .stats-cell .stat-item:last-child { border-right: none; }
+      .proj-cell { grid-column: span 6; }
+      .act-cell, .award-cell { grid-column: span 6; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .page { padding: 68px 12px 24px; }
+      .bento { gap: 10px; }
+      .hero-cell { padding: 28px 24px; }
+      .proj-cell, .act-cell, .award-cell { grid-column: span 12; }
+      .avatar-cell { flex-direction: column; }
+      .stats-cell { grid-column: span 12; flex-direction: row; }
+      .stats-cell .stat-item { border-bottom: none; border-right: 1px solid var(--border); }
+      .stats-cell .stat-item:last-child { border-right: none; }
+      .cta-cell { flex-direction: column; align-items: flex-start; }
+      .modal-body { padding: 20px 20px 28px; }
+      .modal-hero { padding: 28px 20px 20px; }
+      .modal-result { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .skills-inner { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">YMS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about-anchor">About</a></li>
+    <li><a href="#skills-anchor">Skills</a></li>
+    <li><a href="#projects-anchor">Projects</a></li>
+    <li><a href="#contact-anchor">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="메뉴">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about-anchor"    onclick="closeMob()">About</a>
+  <a href="#skills-anchor"   onclick="closeMob()">Skills</a>
+  <a href="#projects-anchor" onclick="closeMob()">Projects</a>
+  <a href="#contact-anchor"  onclick="closeMob()">Contact</a>
+</div>
+
+<div class="page">
+  <div class="bento">
+
+    <!-- ①  HERO -->
+    <div class="cell hero-cell" id="about-anchor">
+      <div class="hero-eyebrow">Drone AI &amp; Web Developer</div>
+      <h1>유민석<span>.</span></h1>
+      <p class="hero-tagline">
+        Data로 기준을 확인하고, 검증으로 품질을 완성하는 유민석입니다.<br>
+        드론 · AI · 웹을 넘나들며 실생활 문제를 기술로 해결합니다.
+      </p>
+      <div class="hero-btns">
+        <a href="https://github.com/minseok0326" target="_blank" rel="noopener" class="btn btn-white">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+        <a href="#projects-anchor" class="btn btn-ghost-w" onclick="document.getElementById('projects-anchor').scrollIntoView({behavior:'smooth'});return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          프로젝트 보기
+        </a>
+      </div>
+    </div>
+
+    <!-- ②  AVATAR + CONTACT -->
+    <div class="cell avatar-cell">
+      <div class="avatar-ring">YMS</div>
+      <div class="avatar-name">유민석</div>
+      <div class="avatar-role">청주대 무인항공기학과 · 2027.02 졸업예정</div>
+      <div class="avatar-contacts">
+        <a href="mailto:yuacd0@naver.com" class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          yuacd0@naver.com
+        </a>
+        <a href="tel:010-5911-3660" class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l1-1a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+          010-5911-3660
+        </a>
+        <a href="https://github.com/minseok0326" target="_blank" rel="noopener" class="contact-row">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          github.com/minseok0326
+        </a>
+      </div>
+    </div>
+
+    <!-- ③  ABOUT / 학력 -->
+    <div class="cell about-cell">
+      <div class="cell-label">About</div>
+      <p class="about-bio">
+        드론 전공 + 항공 AI 연구실 학부연구생으로 컴퓨터 비전 기반 프로젝트를 진행 중입니다. 데이터로 기준을 잡고, 검증으로 품질을 완성합니다.
+      </p>
+      <div class="info-list">
+        <div class="info-item">
+          <span class="info-k">청주대학교</span>
+          <span class="info-v">무인항공기학과 · 2027.02 졸업예정</span>
+        </div>
+        <div class="info-item">
+          <span class="info-k">상동고등학교</span>
+          <span class="info-v">2020.02 졸업</span>
+        </div>
+        <div class="info-item">
+          <span class="info-k">TOEIC</span>
+          <span class="info-v"><span class="badge">785점</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-k">초경량비행장치 1종</span>
+          <span class="info-v"><span class="badge">91-130497</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④  STATS -->
+    <div class="cell stats-cell">
+      <div class="stat-item">
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-desc">완성 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2<span>개</span></div>
+        <div class="stat-desc">경진대회<br>수상 경력</div>
+      </div>
+    </div>
+
+    <!-- ⑤  ACTIVITIES -->
+    <div class="cell act-cell">
+      <div class="cell-label">주요 활동</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-title">항공 AI 연구실 학부연구생</div>
+            <div class="tl-date">2024.12 ~ 현재</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-title">올림피아드 기체 창작 대회팀</div>
+            <div class="tl-date">2025.01 ~ 2025.10</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-title">창업 동아리 Swarm Lab</div>
+            <div class="tl-date">2025.01 ~ 2025.12</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-title">드론 코더 300 프로젝트</div>
+            <div class="tl-date">2025.05 ~ 진행중</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥  AWARDS -->
+    <div class="cell award-cell">
+      <div class="cell-label">수상 경력</div>
+      <div class="award-list">
+        <div class="award-item">
+          <div class="award-icon">🥇</div>
+          <div>
+            <div class="award-title">융복합교과목 성과경진대회 우수상</div>
+            <div class="award-date">2026.01.07</div>
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">🏆</div>
+          <div>
+            <div class="award-title">창업경진대회 우수상</div>
+            <div class="award-date">2025.12.18</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑦  SKILLS -->
+    <div class="cell skills-cell" id="skills-anchor">
+      <div class="cell-label">Skills</div>
+      <div class="skills-inner">
+        <div class="skill-group">
+          <div class="skill-group-label">AI / ML</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">YOLOv8</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">Roboflow</span>
+            <span class="tag">Scikit-learn</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Web</div>
+          <div class="tags">
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Kakao Maps SDK</span>
+            <span class="tag">Vercel</span>
+            <span class="tag">Supabase</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Hardware</div>
+          <div class="tags">
+            <span class="tag">Arduino</span>
+            <span class="tag">Raspberry Pi</span>
+            <span class="tag">DJI 드론</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Tools</div>
+          <div class="tags">
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Jupyter</span>
+            <span class="tag">MSFS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥  PROJECT 01 -->
+    <div class="cell proj-cell clickable" id="projects-anchor" onclick="openModal('sleep')">
+      <div class="proj-header">
+        <div class="proj-num">Project 01</div>
+        <div class="proj-icon">😴</div>
+        <div class="proj-title">조종사 졸음 감지 및 단계별 경고 시스템</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">YOLOv8 + PERCLOS로 조종사 눈 상태를 실시간 인식해 Arduino 경고를 단계별 제어합니다. mAP@0.5 0.989 달성.</p>
+        <div class="proj-techs">
+          <span class="tech-pill">YOLOv8</span>
+          <span class="tech-pill">PERCLOS</span>
+          <span class="tech-pill">Arduino</span>
+          <span class="tech-pill">Roboflow</span>
+        </div>
+        <div class="proj-footer">
+          <span class="more-btn">
+            자세히 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑦  PROJECT 02 -->
+    <div class="cell proj-cell clickable" onclick="openModal('drone')">
+      <div class="proj-header">
+        <div class="proj-num">Project 02</div>
+        <div class="proj-icon">🚁</div>
+        <div class="proj-title">청주시 불법 주차 단속 드론</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">DJI 드론 영상으로 차량을 탐지하고 번호판 OCR로 자동 식별하는 이동형 불법 주정차 단속 시스템입니다.</p>
+        <div class="proj-techs">
+          <span class="tech-pill">Raspberry Pi</span>
+          <span class="tech-pill">YOLOv8</span>
+          <span class="tech-pill">OCR</span>
+          <span class="tech-pill">Roboflow</span>
+        </div>
+        <div class="proj-footer">
+          <span class="more-btn">
+            자세히 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑧  PROJECT 03 -->
+    <div class="cell proj-cell clickable" onclick="openModal('bus')">
+      <div class="proj-header">
+        <div class="proj-num">Project 03</div>
+        <div class="proj-icon">🚌</div>
+        <div class="proj-title">버스 길라잡이</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">실시간 버스 위치를 카카오맵에 시각화하고, Random Forest ML로 도착 시간을 예측하는 웹 서비스입니다.</p>
+        <div class="proj-techs">
+          <span class="tech-pill">Kakao Maps</span>
+          <span class="tech-pill">Vercel</span>
+          <span class="tech-pill">Supabase</span>
+          <span class="tech-pill">Random Forest</span>
+        </div>
+        <div class="proj-footer" style="display:flex;gap:10px;align-items:center;">
+          <span class="more-btn">
+            자세히 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+          <a href="https://bus-live-map.vercel.app" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="display:inline-flex;align-items:center;gap:5px;font-size:0.78rem;font-weight:600;color:#7eb8f7;border:1px solid rgba(126,184,247,0.35);border-radius:20px;padding:5px 12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(126,184,247,0.12)'" onmouseout="this.style.background='transparent'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            사이트 방문
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑪  CONTACT CTA -->
+    <div class="cell cta-cell" id="contact-anchor">
+      <div class="cta-left">
+        <h2>함께 일해요</h2>
+        <p>취업 · 인턴십 기회를 찾고 있습니다. 언제든지 연락 주세요.</p>
+      </div>
+      <div class="cta-btns">
+        <a href="mailto:yuacd0@naver.com" class="btn btn-white">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          이메일 보내기
+        </a>
+        <a href="https://github.com/minseok0326" target="_blank" rel="noopener" class="btn btn-ghost-w">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /bento -->
+
+  <div class="footer">
+    Designed &amp; Built by <strong>유민석</strong> &nbsp;·&nbsp; yuacd0@naver.com &nbsp;·&nbsp; github.com/minseok0326
+  </div>
+</div><!-- /page -->
+
+
+<!-- ══════════════════════════════════════
+     MODALS
+══════════════════════════════════════ -->
+
+<!-- MODAL: 버스 알림이 -->
+<div class="modal-overlay" id="modal-bus">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-hero">
+      <button class="modal-close" onclick="closeModal('bus')" aria-label="닫기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-proj-num">Project 03 · 2026 전국 통합데이터 활용 공모전 출품작</div>
+      <div class="modal-icon">🚌</div>
+      <div class="modal-title">버스 길라잡이</div>
+      <div class="modal-tech-row">
+        <span class="modal-pill">HTML/CSS/JS</span>
+        <span class="modal-pill">Kakao Maps API</span>
+        <span class="modal-pill">공공데이터 API</span>
+        <span class="modal-pill">Vercel</span>
+        <span class="modal-pill">Supabase</span>
+        <span class="modal-pill">Python · scikit-learn</span>
+        <span class="modal-pill">Random Forest</span>
+        <span class="modal-pill">cron-job.org</span>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <div class="modal-section-title">서비스 화면</div>
+        <img src="bus-preview.png" alt="버스 길라잡이 서비스 화면" style="width:100%;border-radius:10px;border:1px solid var(--border);display:block;" />
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">서비스 개요</div>
+        <p>운행 중인 모든 버스의 실시간 위치와 혼잡도를 지도 위에 시각화하고, Random Forest 머신러닝 기반으로 정류장별 도착 시간을 예측하는 웹 서비스입니다. 현재 서울 여의도(162·261·461번)를 테스트 범위로 실제 배포 중이며, 동일 구조로 전국 확장을 목표로 합니다.</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">핵심 기능</div>
+        <ul class="modal-list">
+          <li><strong>실시간 버스 위치</strong> — 5초마다 공공 API를 호출해 지도 위 버스 아이콘을 실시간 이동</li>
+          <li><strong>혼잡도 색상 아이콘</strong> — 버스 아이콘 색상으로 혼잡도를 즉시 시각화 (검색 불필요)</li>
+          <li><strong>노선 구간별 혼잡도</strong> — 노선 경로선 자체를 구간별 정체 색상으로 구분 표시</li>
+          <li><strong>신호등 카운트다운</strong> — 여의도 교차로 19개의 신호 잔여시간 실시간 표시</li>
+          <li><strong>AI 도착 시간 예측</strong> — 버스 아이콘 아래 정류장별 예측 도착 시간 자동 표시</li>
+          <li><strong>운행 현황 패널</strong> — 지도 옆 현재 운행 버스 현황 요약</li>
+          <li><strong>자동 데이터 수집</strong> — cron-job.org로 분당 1회 자동 수집 → Supabase 누적 저장</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">기존 서비스 대비 차별점</div>
+        <ul class="modal-list">
+          <li><strong>혼잡도 즉시 확인</strong> — 기존 앱은 정류장 검색 후 텍스트 확인, 본 서비스는 지도를 여는 순간 모든 버스 색상으로 표시</li>
+          <li><strong>노선 혼잡도 시각화</strong> — 기존은 단색선, 본 서비스는 구간별 도로 정체 반영 색상 표시</li>
+          <li><strong>신호등 정보 연동</strong> — 기존 서비스 전무, 교차로 신호 잔여시간으로 예측 신뢰도 향상</li>
+          <li><strong>ML 기반 도착 예측</strong> — 기존 단순 평균값 대비, 노선·구간·시간대·요일·혼잡도를 복합 학습한 Random Forest 모델 적용</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">AI 모델 상세 (Random Forest)</div>
+        <div class="modal-result">
+          <div class="result-card">
+            <div class="r-num">30<span>일</span></div>
+            <div class="r-label">학습 데이터 (공공API 자동 수집)</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num">100<span>개</span></div>
+            <div class="r-label">트리 수 · 최대 깊이 12단계</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num">0.11<span>분</span></div>
+            <div class="r-label">예측 오차 MAE (약 6.6초)</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num">6<span>개</span></div>
+            <div class="r-label">입력 특성 (노선·구간·시간대·요일·출퇴근·혼잡도)</div>
+          </div>
+        </div>
+        <p style="margin-top:12px;">응답 속도를 위해 노선·구간·시간대·요일의 모든 조합을 사전 계산해 DB에 저장, 조회 시 즉시 반환하는 구조로 설계했습니다.</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">활용 공공데이터</div>
+        <ul class="modal-list">
+          <li><strong>서울시 버스위치 정보 조회 서비스</strong> (서울특별시) — 실시간 GPS·혼잡도·차량번호·현재구간, 5초마다 호출</li>
+          <li><strong>서울시 정류소 정보 조회 서비스</strong> (서울특별시) — 노선별 정류장 이름·위치·순번</li>
+          <li><strong>교통안전 신호등 실시간 정보</strong> (행정안전부 한국지역정보개발원) — 교차로별 신호 잔여시간</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">운영 비용 · 지속 가능성</div>
+        <p>Vercel Hobby + Supabase 무료 플랜 기반으로 <strong>운영 비용 0원</strong>을 실현했습니다. 매 분 자동 수집되는 데이터가 누적될수록 ML 모델 재학습 시 계절·날씨·요일 패턴까지 반영한 정밀 예측이 가능해집니다.</p>
+      </div>
+
+      <div class="modal-links">
+        <a href="https://bus-live-map.vercel.app" target="_blank" rel="noopener" class="modal-link modal-link-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Live Demo
+        </a>
+        <a href="https://github.com/minseok0326/bus-live-map" target="_blank" rel="noopener" class="modal-link modal-link-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: 졸음 감지 -->
+<div class="modal-overlay" id="modal-sleep">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-hero">
+      <button class="modal-close" onclick="closeModal('sleep')" aria-label="닫기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-proj-num">Project 01 &nbsp;·&nbsp; <span style="font-size:0.75rem;font-weight:500;opacity:0.85;">한국항공우주학회 2025 추계학술대회 발표 논문</span></div>
+      <div class="modal-icon">😴</div>
+      <div class="modal-title">조종사 오류 방지를 위한<br>실시간 졸음 감지 및 단계별 경고 시스템</div>
+      <div class="modal-tech-row">
+        <span class="modal-pill">YOLOv8n</span>
+        <span class="modal-pill">PERCLOS</span>
+        <span class="modal-pill">Python</span>
+        <span class="modal-pill">OpenCV</span>
+        <span class="modal-pill">Arduino</span>
+        <span class="modal-pill">Roboflow</span>
+        <span class="modal-pill">MSFS</span>
+        <span class="modal-pill">Random Forest</span>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <div class="modal-section-title">프로젝트 개요</div>
+        <p>조종사의 졸음 및 주의력 저하로 인한 항공 사고 위험을 줄이기 위해, YOLOv8n 기반 실시간 얼굴 상태 인식과 PERCLOS 지표를 결합한 4단계 경고 시스템입니다. Microsoft Flight Simulator(MSFS) 환경에서 주야간 조종사 얼굴 데이터를 직접 수집하고 Roboflow로 라벨링해 1,800장 학습셋을 구성, 한국항공우주학회 2025 추계학술대회에 발표했습니다.</p>
+      </div>
+
+      <!-- 데이터셋 이미지 -->
+      <div class="modal-section">
+        <div class="modal-section-title">데이터셋 수집 — MSFS + Roboflow</div>
+        <img src="sleep_dataset.jpeg" alt="MSFS 데이터셋 및 Roboflow 라벨링" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Microsoft Flight Simulator에서 주·야간 시뮬레이션 중 조종사 얼굴 영상을 직접 캡처하고, Roboflow로 open_eye / closed_eye / head_down 3-class 라벨링. 총 1,800장(학습 88% / 검증 8% / 테스트 4%) 구성.</p>
+      </div>
+
+      <!-- 하드웨어 이미지 -->
+      <div class="modal-section">
+        <div class="modal-section-title">하드웨어 구성 — Arduino 경고 장치</div>
+        <img src="sleep_hardware.jpeg" alt="Arduino 하드웨어 플로우차트" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">PERCLOS 단계 신호를 시리얼 통신으로 Arduino에 전달, 단계별 버저 패턴(없음 / 단음 / 연속) 및 LED(초록·노랑·빨강)를 제어하는 하드웨어 경고 장치 제작.</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">주요 구현</div>
+        <ul class="modal-list">
+          <li>MSFS 가상 환경에서 조종사 얼굴 주야간 데이터 1,800장 수집 및 Roboflow 라벨링</li>
+          <li>YOLOv8n 학습 (50 epoch): open_eye / closed_eye / head_down 3-class 실시간 분류</li>
+          <li>PERCLOS 지표 계산 → 4단계(정상 / 경고 / 위험 / head_down) 졸음 수준 정량화</li>
+          <li>Arduino 연동: 단계별 버저 패턴(없음·단음·연속) + LED(초록·노랑·빨강) 실시간 제어</li>
+          <li>프레임별 눈 상태 + PERCLOS 값 CSV 로깅 및 시계열 시각화</li>
+          <li>Random Forest 분류기로 졸음 단계 예측 정확도 추가 검증</li>
+        </ul>
+      </div>
+
+      <!-- PERCLOS 단계 카드 -->
+      <div class="modal-section">
+        <div class="modal-section-title">PERCLOS 기반 단계별 경고 기준</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;">
+          <div style="background:#1a3a1a;border:1px solid #2d6a2d;border-radius:10px;padding:14px;">
+            <div style="color:#5dca5d;font-weight:700;font-size:0.9rem;margin-bottom:4px;">정상 (Normal)</div>
+            <div style="color:#a8d8a8;font-size:0.82rem;">PERCLOS &lt; 0.15</div>
+            <div style="color:#7ab87a;font-size:0.8rem;margin-top:4px;">경고 없음 · LED 초록</div>
+          </div>
+          <div style="background:#3a2e00;border:1px solid #7a6200;border-radius:10px;padding:14px;">
+            <div style="color:#f0c040;font-weight:700;font-size:0.9rem;margin-bottom:4px;">경고 (Warning)</div>
+            <div style="color:#d4b060;font-size:0.82rem;">0.15 ≤ PERCLOS &lt; 0.25</div>
+            <div style="color:#b89840;font-size:0.8rem;margin-top:4px;">단발 버저 · LED 노랑</div>
+          </div>
+          <div style="background:#3a0a0a;border:1px solid #8a1a1a;border-radius:10px;padding:14px;">
+            <div style="color:#f06060;font-weight:700;font-size:0.9rem;margin-bottom:4px;">위험 (Danger)</div>
+            <div style="color:#d08080;font-size:0.82rem;">PERCLOS ≥ 0.25</div>
+            <div style="color:#b06060;font-size:0.8rem;margin-top:4px;">연속 버저 · LED 빨강</div>
+          </div>
+          <div style="background:#1a1a3a;border:1px solid #3a3a8a;border-radius:10px;padding:14px;">
+            <div style="color:#8080f0;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Head Down</div>
+            <div style="color:#9090c0;font-size:0.82rem;">head_down 클래스 감지</div>
+            <div style="color:#7070a0;font-size:0.8rem;margin-top:4px;">즉시 강제 경고 발동</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 학습 그래프 -->
+      <div class="modal-section">
+        <div class="modal-section-title">모델 학습 그래프 — mAP & Precision</div>
+        <img src="sleep_graph.jpeg" alt="mAP@0.5 및 Precision 학습 그래프" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">50 epoch 학습에서 mAP@0.5 및 Precision 모두 빠르게 수렴하여 전 구간 안정적인 0.98+ 달성.</p>
+      </div>
+
+      <!-- 모델 성능 수치 -->
+      <div class="modal-section">
+        <div class="modal-section-title">모델 성능</div>
+        <div class="modal-result">
+          <div class="result-card">
+            <div class="r-num">0.989</div>
+            <div class="r-label">mAP@0.5 (전체)</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num">100%</div>
+            <div class="r-label">open_eye 정확도</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num">99%</div>
+            <div class="r-label">head_down 정확도</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num">96%</div>
+            <div class="r-label">closed_eye 정확도</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 실시간 감지 데모 이미지 -->
+      <div class="modal-section">
+        <div class="modal-section-title">실시간 눈 상태 감지 예시</div>
+        <img src="sleep_detection.jpeg" alt="실시간 눈 상태 감지 예시" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">YOLOv8n 추론 결과: open_eye / closed_eye 바운딩 박스 및 confidence score 실시간 표시.</p>
+      </div>
+
+      <!-- PERCLOS 로깅 데모 -->
+      <div class="modal-section">
+        <div class="modal-section-title">PERCLOS 실시간 로깅 데모</div>
+        <img src="sleep_demo.jpeg" alt="PERCLOS 실시간 로깅 데모" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">프레임별 눈 상태 탐지 결과와 PERCLOS 수치를 실시간으로 화면에 오버레이하고 CSV로 기록, 시계열 분석 가능.</p>
+      </div>
+
+      <div class="modal-links">
+        <a href="https://github.com/minseok0326" target="_blank" rel="noopener" class="modal-link modal-link-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: 드론 -->
+<div class="modal-overlay" id="modal-drone">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-hero">
+      <button class="modal-close" onclick="closeModal('drone')" aria-label="닫기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-proj-num">Project 02 &nbsp;·&nbsp; <span style="font-size:0.75rem;font-weight:500;opacity:0.85;">2025 C-PBL · 청주대학교 항공학부 무인항공기학</span></div>
+      <div class="modal-icon">🚁</div>
+      <div class="modal-title">청주시 불법 주차 단속 드론</div>
+      <div class="modal-tech-row">
+        <span class="modal-pill">Raspberry Pi</span>
+        <span class="modal-pill">DJI Mini 5 Pro</span>
+        <span class="modal-pill">YOLOv8</span>
+        <span class="modal-pill">OCR</span>
+        <span class="modal-pill">Python</span>
+        <span class="modal-pill">OpenCV</span>
+        <span class="modal-pill">Roboflow</span>
+        <span class="modal-pill">PID 제어</span>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <div class="modal-section-title">프로젝트 개요</div>
+        <p>청주시 불법 주정차 단속 건수가 2020년 203,146건에서 2024년 279,662건으로 지속 증가하는 가운데, 고정형 CCTV와 단속 차량이 접근 불가한 사각지대 문제를 해결하기 위해 기획한 2025 C-PBL 프로젝트입니다. Raspberry Pi 기반 자체 제작 드론에 YOLOv8 차량 탐지 + OCR 번호판 인식을 탑재, 골목길·이면도로 등 기존 인프라가 닿지 않는 구역에서도 단속이 가능한 이동형 시스템을 구현했습니다. 팀장으로서 임베디드 시스템 구축 전반을 담당했습니다.</p>
+      </div>
+
+      <!-- 문제 배경 통계 -->
+      <div class="modal-section">
+        <div class="modal-section-title">문제 배경 — 청주시 불법주정차 단속 현황</div>
+        <img src="drone_stats.jpeg" alt="청주시 불법주정차 단속 건수 그래프 및 기사" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">2020~2024년 청주시 불법주정차 단속건수 꾸준히 증가. 고정형 CCTV는 설치 사각지대 대응 불가, 단속차량은 협소한 골목 진입 불가 — 드론 단속의 필요성 확인.</p>
+      </div>
+
+      <!-- 비교표 -->
+      <div class="modal-section">
+        <div class="modal-section-title">기존 단속 방식 vs 드론 단속 비교</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+            <thead>
+              <tr style="background:rgba(255,255,255,0.07);">
+                <th style="padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.12);">구분</th>
+                <th style="padding:10px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.12);">고정형 CCTV</th>
+                <th style="padding:10px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.12);">단속 차량</th>
+                <th style="padding:10px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.12);color:#7eb8f7;">드론 단속</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);">단속 범위</td>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;">특정 지점 반경</td>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;">차량 진입 가능 도로</td>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;color:#7eb8f7;">사각지대 전역</td>
+              </tr>
+              <tr>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);">기동성</td>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;">없음</td>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;">보통 (정체 시 제한)</td>
+                <td style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;color:#7eb8f7;">매우 높음</td>
+              </tr>
+              <tr>
+                <td style="padding:9px 12px;">경제성</td>
+                <td style="padding:9px 12px;text-align:center;">설치·유지비 비쌈</td>
+                <td style="padding:9px 12px;text-align:center;">인건비 발생</td>
+                <td style="padding:9px 12px;text-align:center;color:#7eb8f7;">저비용 고효율</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- OCR 파이프라인 -->
+      <div class="modal-section">
+        <div class="modal-section-title">데이터셋 구축 & OCR 번호판 인식 파이프라인</div>
+        <img src="drone_ocr.jpeg" alt="OCR 번호판 추출 파이프라인 및 Roboflow 데이터셋" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">DJI Mini 5 Pro로 실제 주정차 차량 항공 영상을 직접 수집하고 Roboflow로 차량·번호판 영역 라벨링. Input Image → 번호판 영역 인식(YOLOv8) → 인식 영역 +5~10% 확대 → 최종 번호판 추출 → OCR 문자 인식의 4단계 파이프라인 구성.</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">주요 구현</div>
+        <ul class="modal-list">
+          <li>DJI Mini 5 Pro로 실제 도로에서 주정차 차량 항공 영상 데이터 직접 수집</li>
+          <li>Roboflow로 차량 및 번호판 영역 맞춤형 학습 데이터셋 구축·라벨링</li>
+          <li>YOLOv8 차량 탐지 → 번호판 영역 추출 (인식 범위 5~10% 확장)</li>
+          <li>OCR 기반 번호판 문자 인식 → GCS 화면 실시간 대조 확인</li>
+          <li>Raspberry Pi 4에 딥러닝 모델 이식, 실시간 차량·번호판 탐지 구현</li>
+          <li>RealFlight 시뮬레이터 기반 정밀 호버링 훈련 → 번호판 식별 최적 화각 유지</li>
+          <li>PID 튜닝으로 기체 진동 문제 해결 및 비행 안정성 확보</li>
+        </ul>
+      </div>
+
+      <!-- 비행 테스트 -->
+      <div class="modal-section">
+        <div class="modal-section-title">비행 테스트 — PID 튜닝으로 안정성 확보</div>
+        <img src="drone_flight.jpeg" alt="PID 수정 전후 비행 테스트" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">초기 비행 진동 문제를 PID 파라미터(P·I·D) 튜닝으로 해결하여 안정적인 호버링 확보. Rate Roll/Pitch P=0.135, I=0.090, D=0.0036 최적값 도출.</p>
+      </div>
+
+      <!-- 실제 탐지 결과 -->
+      <div class="modal-section">
+        <div class="modal-section-title">실제 드론 차량 탐지 결과</div>
+        <video controls style="width:100%;border-radius:10px;margin-bottom:10px;background:#000;" preload="metadata">
+          <source src="불법주차드론 결과.mp4" type="video/mp4">
+        </video>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">실제 청주대학교 교내 도로에서 드론 비행 중 YOLOv8이 주정차 차량을 실시간으로 인식한 결과. 항공 시점 특유의 탑뷰 각도에서도 안정적인 CAR 탐지 확인.</p>
+      </div>
+
+      <!-- 성과 -->
+      <div class="modal-section">
+        <div class="modal-section-title">결론 및 기대 효과</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+            <div style="color:#7eb8f7;font-weight:700;font-size:0.88rem;margin-bottom:6px;">사각지대 해소</div>
+            <div style="color:var(--text-muted);font-size:0.82rem;">골목길·이면도로 등 기존 단속 인프라 미치지 못하는 구역 완전 커버</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+            <div style="color:#7eb8f7;font-weight:700;font-size:0.88rem;margin-bottom:6px;">긴급차량 진입로 확보</div>
+            <div style="color:var(--text-muted);font-size:0.82rem;">불법주차 근절로 소방차·구급차 골든타임 확보 및 시민 안전 기여</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+            <div style="color:#7eb8f7;font-weight:700;font-size:0.88rem;margin-bottom:6px;">저비용 고효율</div>
+            <div style="color:var(--text-muted);font-size:0.82rem;">CCTV 설치비·인건비 대비 저비용으로 넓은 구역 실시간 모니터링</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+            <div style="color:#7eb8f7;font-weight:700;font-size:0.88rem;margin-bottom:6px;">팀장 역할</div>
+            <div style="color:var(--text-muted);font-size:0.82rem;">임베디드 시스템 구축 총괄 · (주)청주드론교육원 협력 업무 조율</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-links">
+        <a href="https://github.com/minseok0326" target="_blank" rel="noopener" class="modal-link modal-link-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /* ── NAV ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMob() { mobileMenu.classList.remove('open'); }
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMob();
+  });
+
+  /* ── MODAL ── */
+  function openModal(id) {
+    const overlay = document.getElementById('modal-' + id);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    overlay.focus();
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // ESC 닫기
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(o => {
+        o.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+  // 오버레이 클릭 닫기
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  /* ── SCROLL REVEAL ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+  document.querySelectorAll('.cell').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity .5s ease ${i * 0.05}s, transform .5s ease ${i * 0.05}s, box-shadow .25s, border-color .25s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
