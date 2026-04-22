@@ -159,7 +159,9 @@
       display: flex; align-items: center; justify-content: center;
       font-size: clamp(1.6rem,3vw,2.6rem); font-weight: 900; color: #fff;
       letter-spacing: -1px; box-shadow: 0 8px 24px rgba(43,91,224,.25);
+      overflow: hidden;
     }
+    .avatar-ring img { width: 100%; height: 100%; object-fit: cover; }
     .avatar-name { font-size: 1.1rem; font-weight: 800; color: var(--navy); letter-spacing: -.3px; }
     .avatar-role { font-size: .78rem; color: var(--muted); font-weight: 500; }
     .avatar-contacts { display: flex; flex-direction: column; gap: 6px; width: 100%; }
@@ -468,7 +470,7 @@
 
     <!-- ②  AVATAR + CONTACT -->
     <div class="cell avatar-cell">
-      <div class="avatar-ring">YMS</div>
+      <div class="avatar-ring"><img src="증명사진.jpg" alt="유민석"></div>
       <div class="avatar-name">유민석</div>
       <div class="avatar-role">청주대 무인항공기학과 · 2027.02 졸업예정</div>
       <div class="avatar-contacts">
