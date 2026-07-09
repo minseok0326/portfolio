@@ -509,10 +509,13 @@
           <div>
             <div class="skill-group-title">Web / Tools</div>
             <div class="skill-tags">
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">TypeScript</span>
               <span class="skill-tag">Git / GitHub</span>
               <span class="skill-tag">Vercel</span>
               <span class="skill-tag">Supabase</span>
               <span class="skill-tag">Kakao Maps API</span>
+              <span class="skill-tag">공공데이터 API</span>
             </div>
           </div>
         </div>
@@ -545,6 +548,13 @@
             <div class="proj-title-text">버스 길라잡이</div>
             <p class="proj-desc-text">실시간 버스 위치를 카카오맵에 시각화하고, Random Forest ML로 도착 시간을 예측하는 웹 서비스입니다. 현재 서울 여의도 실제 배포 중.</p>
             <div class="proj-techs">Kakao Maps API · Vercel · Supabase · Random Forest · scikit-learn · 공공데이터 API</div>
+            <span class="proj-more">자세히 보기</span>
+          </div>
+          <div class="proj-item" onclick="openModal('jeonse')">
+            <div class="proj-num-label">04. 전세안전확인</div>
+            <div class="proj-title-text">전세 안전 확인 — 전세사기 예방 서비스</div>
+            <p class="proj-desc-text">주소와 보증금을 입력하면 공공 API를 자동 조회해 전세가율(깡통지수), 건축물대장, 등기부 근저당·압류를 한눈에 확인하는 전세사기 예방 웹 서비스입니다. Vercel 배포 중.</p>
+            <div class="proj-techs">Next.js 16 · TypeScript · Tailwind CSS · shadcn/ui · Python · 공공데이터 API · CODEF</div>
             <span class="proj-more">자세히 보기</span>
           </div>
         </div>
@@ -900,6 +910,98 @@
           Live Demo
         </a>
         <a href="https://github.com/minseok0326/bus-live-map" target="_blank" rel="noopener" class="modal-link modal-link-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ MODAL: 전세안전확인 ══ -->
+<div class="modal-overlay" id="modal-jeonse">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('jeonse')" aria-label="닫기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-proj-num">04 &mdash; 전세사기 예방 웹 서비스 · Vercel 배포</div>
+      <div class="modal-title">전세 안전 확인<br>이 집, 계약해도 될까요?</div>
+      <div class="modal-pills">
+        <span class="modal-pill">Next.js 16</span>
+        <span class="modal-pill">TypeScript</span>
+        <span class="modal-pill">Tailwind CSS</span>
+        <span class="modal-pill">shadcn/ui</span>
+        <span class="modal-pill">Python</span>
+        <span class="modal-pill">공공데이터 API</span>
+        <span class="modal-pill">CODEF</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-sec">
+        <div class="modal-sec-title">프로젝트 개요</div>
+        <p>전세 계약 전 임차인이 혼자서 핵심 위험 지표를 빠르게 확인할 수 있는 웹 서비스입니다. 주소와 보증금만 입력하면 정부 공공 API를 자동으로 조회해 전세가율(깡통지수), 건축물대장 이상 여부, 등기부 근저당·압류 정보를 한눈에 표시하고 SAFE / CAUTION / DANGER / UNKNOWN 4단계로 위험도를 즉시 판정합니다.</p>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-sec-title">서비스 3단계 여정</div>
+        <ul class="modal-list">
+          <li><strong>1단계 — 혼자 미리 확인:</strong> 주소 정규화 → 실거래가 조회 → 전세가율 계산 → 건축물대장 확인 → 등기부 확인 → SAFE / CAUTION / DANGER / UNKNOWN 판정</li>
+          <li><strong>2단계 — 중개인 만날 때:</strong> 중개사 등록 유효 여부 조회 (전국 CSV 약 64만 행 기반)</li>
+          <li><strong>3단계 — 계약 직전:</strong> 임대인 신원·전입세대 확인 등 체크리스트 가이드 제공</li>
+        </ul>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-sec-title">위험 판정 기준</div>
+        <table class="modal-table">
+          <thead>
+            <tr><th>등급</th><th>전세가율</th><th>의미</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="color:#22a07a;font-weight:700;">SAFE</td><td>&lt; 70%</td><td>정상 범위</td></tr>
+            <tr><td style="color:#c9922b;font-weight:700;">CAUTION</td><td>70 ~ 80%</td><td>주의 필요</td></tr>
+            <tr><td style="color:#c1121f;font-weight:700;">DANGER</td><td>&gt; 80%</td><td>위험 — 보증금 회수 어려울 수 있음</td></tr>
+            <tr><td style="color:#5a4fcf;font-weight:700;">UNKNOWN</td><td>시세 산정 불가</td><td>수기 확인 필요</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-sec-title">연동 공공 API</div>
+        <ul class="modal-list">
+          <li><strong>주소 정규화</strong> — 행안부 juso.go.kr</li>
+          <li><strong>실거래가</strong> — 국토부 공공데이터포털 (RTMSDataSvc)</li>
+          <li><strong>건축물대장</strong> — 국토부 건축HUB</li>
+          <li><strong>등기부등본</strong> — CODEF 샌드박스 (인터넷등기소 대행)</li>
+          <li><strong>중개사 조회</strong> — 공공데이터포털 CSV (~64만 행)</li>
+        </ul>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-sec-title">기술 구조</div>
+        <div class="modal-result">
+          <div class="result-card">
+            <div class="r-num" style="font-size:1.1rem;">Next.js 16</div>
+            <div class="r-label">React 19 · App Router · API Routes</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num" style="font-size:1.1rem;">TypeScript</div>
+            <div class="r-label">엄격한 타입 기반 스키마 설계</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num" style="font-size:1.1rem;">Python</div>
+            <div class="r-label">공공 API 프로토타입 검증 스크립트</div>
+          </div>
+          <div class="result-card">
+            <div class="r-num" style="font-size:1.1rem;">Vercel</div>
+            <div class="r-label">서버리스 배포 · 실서비스 운영 중</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-links">
+        <a href="https://web-one-alpha-78.vercel.app/" target="_blank" rel="noopener" class="modal-link modal-link-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Live Demo
+        </a>
+        <a href="https://github.com/minseok0326/jeonse-fraud-prevention" target="_blank" rel="noopener" class="modal-link modal-link-ghost">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2.01 1.01-2.72-.1-.25-.44-1.29.1-2.69 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.337 1.91-1.29 2.75-1.02 2.75-1.02.54 1.4.2 2.44.1 2.69.63.71 1.01 1.61 1.01 2.72 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
           GitHub
         </a>
